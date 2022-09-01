@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- minimart.kasir inherit tree view -->
+    <record id="minimart_kasir_view_tree_inherit" model="ir.ui.view">
+        <field name="name">minimart.kasir.inherit.view.tree</field>
+        <field name="model">minimart.kasir</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="minimart_manusia_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='alamat']" position="after">
+                <field name="id_pegawai"/>
+                <field name="status_pegawai"/>
+            </xpath>   
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="string">Nama Kasir</attribute>                
+            </xpath>         
+        </field>
+    </record>
+
+    <!-- minimart.kasir inherit form view -->
+    <record id="minimart_kasir_view_form_inherit" model="ir.ui.view">
+        <field name="name">minimart.kasir.inherit.view.form</field>
+        <field name="model">minimart.kasir</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="minimart_manusia_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//sheet//group" position="after">
+                <group name="data" string="Data">
+                    <field name="id_pegawai"/>
+                    <field name="status_pegawai"/>
+                </group>                
+            </xpath>   
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="string">Nama Kasir</attribute>                
+            </xpath>
+        </field>
+    </record>
+    <!-- minimart.kasir action window -->
+    <record id="minimart_kasir_action" model="ir.actions.act_window">
+        <field name="name">Kasir</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">minimart.kasir</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="minimart_kasir_menu_act" 
+            name="Kasir" 
+            parent="minimart_menuuser_categ" 
+            action="minimart_kasir_action" 
+            sequence="20"/>
+
+</odoo>

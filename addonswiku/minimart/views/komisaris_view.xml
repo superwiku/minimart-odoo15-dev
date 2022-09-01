@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- minimart.komisaris inherit tree view -->
+    <record id="minimart_komisaris_view_tree_inherit" model="ir.ui.view">
+        <field name="name">Daftar Komisaris</field>
+        <field name="model">res.partner</field>
+        <field name="mode">extension</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_name']" position="after">
+                <field name="jabatan"/>
+            </xpath>   
+            <xpath expr="//field[@name='activity_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>   
+            <xpath expr="//field[@name='vat']" position="attributes">
+                <attribute name="string">NPWP</attribute>                
+            </xpath>  
+        </field>
+    </record>
+    <!-- minimart.komisaris inherit form view -->
+    <record id="minimart_komisaris_view_form_inherit" model="ir.ui.view">
+        <field name="name">Form Komisaris</field>
+        <field name="model">res.partner</field>
+        <field name="mode">extension</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="jabatan"/>
+            </xpath>
+            <xpath expr="//field[@name='function']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="attributes">
+                <attribute name="string">NPWP</attribute>                
+            </xpath> 
+        </field>
+    </record>
+    <!-- minimart.komisaris action window -->
+    <record id="minimart_komisaris_action" model="ir.actions.act_window">
+        <field name="name">Komisaris</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="minimart_komisaris_menu_act" 
+              name="Komisaris" 
+              parent="minimart_menu_root" 
+              action="minimart_komisaris_action" 
+              sequence="41"/>
+
+</odoo>

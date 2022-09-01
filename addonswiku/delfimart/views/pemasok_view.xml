@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- model.name tree view -->
+    <record id="delfimart_pemasok_view_tree" model="ir.ui.view">
+        <field name="name">TreePemasok</field>
+        <field name="model">delfimart.pemasok</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="kode_pemasok"/>
+                <field name="name"/>
+                <!-- <field name="alamat"/>
+                <field name="provinsi"/> -->
+                <field name="no_telepon"/>
+                <!-- <field name="no_fax"/>
+                <field name="kontak"/> -->
+        
+            </tree>
+        </field>
+    </record>
+
+    <!-- model.name form view -->
+    <record id="delfimart_pemasok_view_form" model="ir.ui.view">
+        <field name="name">FormPemasok</field>
+        <field name="model">delfimart.pemasok</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="kode_pemasok"/>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="alamat"/>
+                        <field name="provinsi"/>
+                        <field name="no_telepon"/>
+                        <field name="no_fax"/>
+                        <field name="kontak"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- model.name action window -->
+    <record id="delfimart_pemasok_action" model="ir.actions.act_window">
+        <field name="name">Pemasok</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">delfimart.pemasok</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="delfimart_pemasok_menu_act" 
+            name="Pemasok" 
+            parent="delfimart_root"
+            action="delfimart_pemasok_action" 
+            sequence="40"/>
+</odoo>

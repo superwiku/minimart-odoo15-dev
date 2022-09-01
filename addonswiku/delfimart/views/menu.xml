@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+    <menuitem id="delfimart_root" 
+            name="Delmart" 
+            sequence="10"/>
+
+        <!-- This Menu Item Must have a parent -->
+        <menuitem id="delfimart_item_menu_categ" 
+                name="Item" 
+                parent="delfimart_root" 
+                sequence="10"/>
+
+        <!-- This Menu Item Must have a parent -->
+        <menuitem id="delfimart_demand_menu_categ" 
+                name="Permintaan Toko" 
+                parent="delfimart_root" 
+                sequence="40"/>
+       
+       <!-- This Menu Item Must have a parent -->
+        <menuitem id="delfimart_supply_menu_categ" 
+                name="Persediaan Toko" 
+                parent="delfimart_root" 
+                sequence="40"/>
+       
+       <!-- This Menu Item Must have a parent -->
+       <menuitem id="delfimart_transaksi_menu_categ" 
+                name="Transaksi" 
+                parent="delfimart_root" 
+                sequence="50"/>
+</odoo>

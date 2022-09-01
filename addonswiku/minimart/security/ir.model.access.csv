@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_minimart_grup,access.minimart.grup,model_minimart_grup,,1,1,1,1
+access_minimart_produk,access.minimart.produk,model_minimart_produk,,1,1,1,1
+access_minimart_barang,access.minimart.barang,model_minimart_barang,,1,1,1,1
+access_minimart_penjualan,access.minimart.penjualan,model_minimart_penjualan,,1,1,1,1
+access_minimart_detailpenjualan,access.minimart.detailpenjualan,model_minimart_detailpenjualan,,1,1,1,1
+access_minimart_manusia,access.minimart.manusia,model_minimart_manusia,,1,1,1,1
+access_minimart_pelanggan,access.minimart.pelanggan,model_minimart_pelanggan,,1,1,1,1
+access_minimart_supplier,access.minimart.supplier,model_minimart_supplier,,1,1,1,1
+access_minimart_kasir,access.minimart.kasir,model_minimart_kasir,,1,1,1,1

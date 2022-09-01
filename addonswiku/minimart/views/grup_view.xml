@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="minimart_grup_view_tree" model="ir.ui.view">
+        <field name="name">minimart_grup_view_tree</field>
+        <field name="model">minimart.grup</field>
+        <field name="arch" type="xml">
+            <tree string="minimart_grup_tree">
+                <field name="name"/>
+                <field name="kode_grup"/>
+            </tree>
+        </field>
+    </record>
+    <record id="minimart_grup_view_form" model="ir.ui.view">
+        <field name="name">minimart_grup_view_form</field>
+        <field name="model">minimart.grup</field>
+        <field name="arch" type="xml">
+            <form string="Grup Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="kode_grup"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page name="produk" string="Produk">
+                            <field name="produk_ids">
+                                <tree editable='bottom'>
+                                    <field name="kode_produk"/>
+                                    <field name="name"/>                                 
+                                </tree>
+                            </field>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="minimart_grup_action" model="ir.actions.act_window">
+        <field name="name">Grup</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">minimart.grup</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="minimart_grup_menu_action"
+              name="Grup"
+              parent="minimart_menubarang_categ"
+              action="minimart_grup_action"
+              sequence="10"/>
+</odoo>

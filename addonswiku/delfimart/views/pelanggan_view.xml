@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- model.name tree view -->
+    <record id="delfimart_pelanggan_view_tree" model="ir.ui.view">
+        <field name="name">TreePelanggan</field>
+        <field name="model">delfimart.pelanggan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="kode_pelanggan"/>
+                <field name="name"/>
+                <!-- <field name="alamat"/> -->
+                <field name="no_telepon"/>
+        
+            </tree>
+        </field>
+    </record>
+
+    <!-- model.name form view -->
+    <record id="delfimart_pelanggan_view_form" model="ir.ui.view">
+        <field name="name">FormPelanggan</field>
+        <field name="model">delfimart.pelanggan</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="kode_pelanggan"/>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="alamat"/>
+                        <field name="no_telepon"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- model.name action window -->
+    <record id="delfimart_pelanggan_action" model="ir.actions.act_window">
+        <field name="name">pelanggan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">delfimart.pelanggan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="delfimart_pelanggan_menu_act" 
+            name="Pelanggan" 
+            parent="delfimart_root" 
+            action="delfimart_pelanggan_action" 
+            sequence="50"/>
+</odoo>

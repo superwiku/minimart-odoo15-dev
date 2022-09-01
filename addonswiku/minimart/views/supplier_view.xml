@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- minimart.supplier tree view -->
+    <record id="minimart_supplier_view_tree" model="ir.ui.view">
+        <field name="name">Tabel Supplier</field>
+        <field name="model">minimart.supplier</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="alamat"/>
+                <field name="pic"/>
+                <field name="no_pic"/>
+                <field name="barang_ids"/>                
+            </tree>
+        </field>
+    </record>
+    <!-- minimart.supplier form view -->
+    <record id="minimart_supplier_view_form" model="ir.ui.view">
+        <field name="name">Form Supplier</field>
+        <field name="model">minimart.supplier</field>
+        <field name="arch" type="xml">
+            <form string="Supplier">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="alamat"/>
+                        <field name="pic"/>
+                        <field name="no_pic"/>
+                    </group>
+                    <group name="daftar_barang" string="Daftar Barang">
+                        <field name="barang_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- minimart.supplier action window -->
+    <record id="minimart_supplier_action" model="ir.actions.act_window">
+        <field name="name">Daftar Supplier</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">minimart.supplier</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="minimart_supplier_menu_act" 
+              name="Supplier" 
+              parent="minimart_menu_root" 
+              action="minimart_supplier_action" 
+              sequence="40"/>
+
+</odoo>

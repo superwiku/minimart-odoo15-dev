@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- minimart.penjualan tree view -->
+    <record id="minimart_penjualan_view_tree" model="ir.ui.view">
+        <field name="name">minimart.penjualan.view.tree</field>
+        <field name="model">minimart.penjualan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="membership"/>
+                <field name="nama_nonmember" attrs="{'invisible':[('membership','=',True)]}"/>
+                <field name="id_member" attrs="{'invisible':[('membership','=',False)]}"/>
+                <field name="pelanggan_id" attrs="{'invisible':[('membership','=',False)]}"/>
+                <field name="gender"/>
+                <field name="tgl_nota"/>
+                <field name="total_bayar"/>                
+            </tree>
+        </field>
+    </record>
+
+    <!-- minimart.penjualan form view -->
+    <record id="minimart_penjualan_view_form" model="ir.ui.view">
+        <field name="name">minimart.penjualan.view.form</field>
+        <field name="model">minimart.penjualan</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>                        
+                    <group>
+                        <field name="membership"/>
+                        <field name="name"/>
+                        <field name="nama_nonmember" attrs="{'invisible':[('membership','=',True)]}"/>
+                        <field name="pelanggan_id" attrs="{'invisible':[('membership','=',False)]}"/>
+                        <field name="id_member" attrs="{'invisible':[('membership','=',False)]}"/>
+                        <field name="gender"/>
+                        <field name="tgl_nota"/>
+                        <field name="total_bayar"/>                                 
+                    </group>
+                    <group name="name" string="Barang">
+                        <field name="detailpenjualan_ids">
+                            <tree editable='bottom'>
+                                <field name="barang_id"/>
+                                <field name="satuan"/>
+                                <field name="harga_satuan"/>
+                                <field name="qty"/>
+                                <field name="subtotal" sum='Total Bayar'/>                                
+                            </tree>
+                        </field>                        
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- minimart.penjualan action window -->
+    <record id="minimart_penjualan_action" model="ir.actions.act_window">
+        <field name="name">Penjualan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">minimart.penjualan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="minimart_penjualan_menu_act" 
+        name="Penjualan" 
+        parent="minimart_menu_root" 
+        action="minimart_penjualan_action" 
+        sequence="20"/>
+
+</odoo>

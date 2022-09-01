@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- model.name form view -->
+    <record id="delfimart_produk_view_form" model="ir.ui.view">
+        <field name="name">Form Produk</field>
+        <field name="model">delfimart.produk</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <!-- Add your fields here -->
+                        <field name="nomor_kode_produk"/>
+                        <field name="name"/>
+                        <field name="kode_grup_id"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page name="produk" string="Barang">
+                            <field name="barang_ids">
+                                <tree editable ="bottom">
+                                    <field name="kode_barang"/>
+                                    <field name="name"/>
+                                    <!-- <field name="nomer_kode_produk_id"/> -->
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- model.name tree view -->
+    <record id="delfimart_produk_view_tree" model="ir.ui.view">
+        <field name="name">Treedelfimart</field>
+        <field name="model">delfimart.produk</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="nomor_kode_produk"/>
+                <field name="name"/>
+                <field name="kode_grup_id"/>
+                
+            </tree>
+        </field>
+    </record>
+
+    <!-- model.name action window -->
+    <record id="delfimart_produk_action" model="ir.actions.act_window">
+        <field name="name">Produk delmart</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">delfimart.produk</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="delfimart_produk_menu_action" 
+            name="Produk" 
+            parent="delfimart_item_menu_categ" 
+            action="delfimart_produk_action" 
+            sequence="20"/>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <!-- model.name action window -->
+        <record id="delfimart_dagangan_action" model="ir.actions.act_window">
+            <field name="name">delfimart_dagangan_action</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="delfimart_dagangan_menu_act" 
+                name="Dagangan" 
+                parent="delfimart_item_menu_categ" 
+                action="delfimart_dagangan_action" 
+                sequence="40"/>
+    
+    </data>
+    
+
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <!-- minimart.pelanggan inherit tree view -->
+    <record id="minimart_pelanggan_view_tree_inherit" model="ir.ui.view">
+        <field name="name">minimart.pelanggan.inherit.view.tree</field>
+        <field name="model">minimart.pelanggan</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="minimart_manusia_view_tree"/>
+        <field name="arch" type="xml">           
+            <xpath expr="//field[@name='alamat']" position="after">
+                    <field name="id_member"/>
+                    <field name="level"/>  
+            </xpath>
+        </field>
+    </record>
+    <!-- minimart.pelanggan inherit form view -->
+    <record id="minimart_pelanggan_view_form_inherit" model="ir.ui.view">
+        <field name="name">minimart.pelanggan.inherit.view.form</field>
+        <field name="model">minimart.pelanggan</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="minimart_manusia_view_form"/>
+        <field name="arch" type="xml">           
+            <xpath expr="//form//sheet//group" position="after">
+                <group name="level" string="Level">
+                    <field name="id_member"/>
+                    <field name="level"/>                    
+                </group>                
+            </xpath>
+        </field>
+    </record>
+   
+    <!-- minimart.pelanggan action window -->
+    <record id="minimart_pelanggan_action" model="ir.actions.act_window">
+        <field name="name">Daftar Pelanggan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">minimart.pelanggan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="minimart_pelanggan_menu_act" 
+        name="Pelanggan" 
+        parent="minimart_menuuser_categ" 
+        action="minimart_pelanggan_action" 
+        sequence="10"/>
+
+</odoo>

@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- model.name tree view -->
+    <record id="delfimart_penjualan_view_tree" model="ir.ui.view">
+        <field name="name">PenjualanTree</field>
+        <field name="model">delfimart.penjualan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="no_nota"/>
+                <!-- <field name="kode_pelanggan_id"/> -->
+                <field name="total_bayar"/>
+                <field name="membership"/>
+                <field name="nama_nonmember"/> 
+                <field name="pelanggan_id"/>
+                <field name="id_member"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- model.name form view -->
+    <record id="delfimart_penjualan_view_form" model="ir.ui.view">
+        <field name="name">FormPenjualan</field>
+        <field name="model">delfimart.penjualan</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="no_nota"/>
+                        <field name="membership"/>
+                        <field name="nama_nonmember" attrs ="{'invisible':[('membership','=',True)]}"/> 
+                        <field name="pelanggan_id" attrs ="{'invisible':[('membership','=',False)]}"/>
+                        <field name="id_member" attrs ="{'invisible':[('membership','=',False)]}"/>
+                        <field name="tgl_nota"/>
+                        <field name="total_bayar"/>
+                    </group>
+                    <group>
+                       <!-- <field name="kode_pelanggan_id"/> -->
+                       <field name="user_id"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page name="penjualan_detail" string="Penjualan Detail">
+                            <field name="penjualandetail_ids">
+                                <tree editable ="bottom">
+                                    <!-- <field name="no_nota_id"/> -->
+                                    <field name="kode_barang_id"/>
+                                    <field name="harga_jual"/>
+                                    <field name="jumlah"/>
+                                    <field name="sub_total" sum="Total"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- model.name action window -->
+    <record id="delfimart_penjualan_action" model="ir.actions.act_window">
+        <field name="name">PenjualanAction</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">delfimart.penjualan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="delfimart_penjualan_menu_act" 
+            name="Penjualan" 
+            parent="delfimart_transaksi_menu_categ" 
+            action="delfimart_penjualan_action" 
+            sequence="20"/>
+</odoo>

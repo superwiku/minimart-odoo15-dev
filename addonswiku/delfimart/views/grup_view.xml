@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- model.name tree view -->
+    <record id="delfimart_grup_view_tree" model="ir.ui.view">
+        <field name="name">TreeGrup</field>
+        <field name="model">delfimart.grup</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="nomor_kode_grup"/>
+                <field name="name"/>
+                <field name="produk_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- model.name form view -->
+    <record id="delfimart_grup_view_form" model="ir.ui.view">
+        <field name="name">FormGrup</field>
+        <field name="model">delfimart.grup</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <!-- Add your fields here -->
+                        <field name="nomor_kode_grup"/>
+                        <field name="name"/>
+                        
+                    </group>
+                    <notebook colspan="4">
+                        <page name="produk" string="Produk">
+                            <field name="produk_ids">
+                                <tree editable ="bottom">
+                                    <!-- <field name="nomer_kode_produk_id"/> -->
+                                    <field name="nomor_kode_produk"/>
+                                    <field name="name"/>
+                                    <!-- <field name="kode_produk_id"/> -->
+                            
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- model.name action window -->
+    <record id="delfimart_grup_action" model="ir.actions.act_window">
+        <field name="name">Grup</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">delfimart.grup</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="delfimart_grup_menu_action" 
+        name="Grup" 
+        parent="delfimart_item_menu_categ" 
+        action="delfimart_grup_action" 
+        sequence="10"/>
+</odoo>

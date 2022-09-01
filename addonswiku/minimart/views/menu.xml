@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+    <menuitem id="minimart_menu_root"
+              name="Minimart"
+              sequence="10"/>
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="minimart_menubarang_categ"
+              name="Barang"
+              parent="minimart_menu_root"
+              sequence="10"/>
+    <!-- This Menu Item Must have a parent -->
+    
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="minimart_menuuser_categ"
+              name="User"
+              parent="minimart_menu_root"
+              sequence="30"/>
+</odoo>

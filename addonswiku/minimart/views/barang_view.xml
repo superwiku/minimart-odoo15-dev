@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="minimart_barang_view_tree" model="ir.ui.view">
+        <field name="name">minimart_barang_view_tree</field>
+        <field name="model">minimart.barang</field>
+        <field name="arch" type="xml">
+            <tree string="minimart_barang_tree">
+                <field name="name"/>
+                <field name="jenis"/>
+                <field name="kode_barang"/>
+                <field name="satuan"/>
+                <field name="harga_beli"/>
+                <field name="harga_jual"/>
+                <field name="stok"/>
+                <field name="produk_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="minimart_barang_view_form" model="ir.ui.view">
+        <field name="name">minimart_barang_view_form</field>
+        <field name="model">minimart.barang</field>
+        <field name="arch" type="xml">
+            <form string="minimart_barang_form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="jenis"/>
+                        <field name="satuan"/>
+                        <field name="kode_spec"/>
+                        <field name="kode_barang"/>
+                        <field name="produk_id"/>
+                    </group>
+                    <group>
+                        <field name="harga_beli"/>
+                        <field name="harga_jual"/>
+                        <field name="stok"/>
+                    </group>
+                    <group name="daftar_supplier" string="Daftar Supplier">
+                        <field name="supplier_ids">
+                            <tree>
+                                <field name="name"/>
+                                <field name="alamat"/>
+                                <field name="pic"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="minimart_barang_action" model="ir.actions.act_window">
+        <field name="name">Barang</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">minimart.barang</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+   <!-- This Menu Item must have a parent and an action -->
+   <menuitem id="minimart_barang_menu_action" 
+             name="Barang" 
+             parent="minimart_menubarang_categ" 
+             action="minimart_barang_action" 
+             sequence="30"/>
+</odoo>

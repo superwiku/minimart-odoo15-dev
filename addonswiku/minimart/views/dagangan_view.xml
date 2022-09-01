@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <record id="minimart_dagangan_tree_inherit" model="ir.ui.view">-->
+<!--        <field name="name">minimart_dagangan_tree_inherit</field>-->
+<!--        <field name="model">product.product</field>-->
+<!--        <field name="inherit_id" ref="product.product_product_tree_view"/>-->
+
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Inherit Form View to Modify it &ndash;&gt;-->
+<!--    <record id="minimart_dagangan_form_inherit" model="ir.ui.view">-->
+<!--        <field name="name">minimart_dagangan_form_inherit</field>-->
+<!--        <field name="model">product.product</field>-->
+<!--        <field name="inherit_id" ref="product.product_normal_form_view"/>-->
+
+<!--    </record>-->
+    <record id="minimart_dagangan_action" model="ir.actions.act_window">
+        <field name="name">minimart_dagangan_action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="minimart_dagangan_menu_action"
+              name="Dagangan"
+              parent="minimart_menubarang_categ"
+              action="minimart_dagangan_action"
+              sequence="40"/>
+</odoo>

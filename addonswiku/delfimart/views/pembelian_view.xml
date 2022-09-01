@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- model.name tree view -->
+    <record id="delfimart_pembelian_view_tree" model="ir.ui.view">
+        <field name="name">PembelianTree</field>
+        <field name="model">delfimart.pembelian</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="no_masuk"/>
+                <field name="kode_pemasok_id"/>
+                <field name="total_bayar"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- model.name form view -->
+    <record id="delfimart_pembelian_view_form" model="ir.ui.view">
+        <field name="name">FormPembelian</field>
+        <field name="model">delfimart.pembelian</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                       <field name="no_masuk"/>
+                       <field name="tgl_masuk"/>
+                       <field name="total_bayar"/>
+                    </group>
+                    <group>
+                       <field name="kode_pemasok_id"/>
+                       <field name="user_id"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page name="pembelian_detail" string="Pembelian Detail">
+                            <field name="pembeliandetail_ids">
+                                <tree editable ="bottom">
+                                    <!-- <field name="no_masuk_id"/> -->
+                                    <field name="kode_barang_id"/>
+                                    <field name="harga_beli_satuan"/>
+                                    <field name="jumlah"/>
+                                    <field name="sub_total" sum="Total"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- model.name action window -->
+    <record id="delfimart_pembelian_action" model="ir.actions.act_window">
+        <field name="name">PembelianAction</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">delfimart.pembelian</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="delfimart_pembelian_menu_act" 
+            name="Pembelian" 
+            parent="delfimart_transaksi_menu_categ"
+            action="delfimart_pembelian_action" 
+            sequence="10"/>
+</odoo>

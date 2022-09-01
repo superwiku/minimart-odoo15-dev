@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_delfimart_grup,access.delfimart.grup,model_delfimart_grup,,1,1,1,1
+access_delfimart_produk,access.delfimart.produk,model_delfimart_produk,,1,1,1,1
+access_delfimart_barang,access.delfimart.barang,model_delfimart_barang,,1,1,1,1
+access_delfimart_person,access.delfimart.person,model_delfimart_person,,1,1,1,1
+access_delfimart_pemasok,access.delfimart.pemasok,model_delfimart_pemasok,,1,1,1,1
+access_delfimart_pelanggan,access.delfimart.pelanggan,model_delfimart_pelanggan,,1,1,1,1
+access_delfimart_penjualan,access.delfimart.penjualan,model_delfimart_penjualan,,1,1,1,1
+access_delfimart_pembelian,access.delfimart.pembelian,model_delfimart_pembelian,,1,1,1,1
+access_delfimart_penjualandetail,access.delfimart.penjualandetail,model_delfimart_penjualandetail,,1,1,1,1
+access_delfimart_pembeliandetail,access.delfimart.pembeliandetail,model_delfimart_pembeliandetail,,1,1,1,1
+
+
+
+
+
+

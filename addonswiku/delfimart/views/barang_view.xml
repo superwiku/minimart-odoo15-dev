@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+<!-- model.name tree view -->
+<record id="delfimart_barang_view_tree" model="ir.ui.view">
+    <field name="name">Tree Barang</field>
+    <field name="model">delfimart.barang</field>
+    <field name="arch" type="xml">
+        <tree>
+            <!-- Add your fields here -->
+            <field name="kode_produk_id"/>
+            <field name="name"/>
+            <field name="satuan"/>
+            <field name="harga_beli"/>
+            <field name="harga_jual"/>
+            <field name="stok"/>
+        </tree>
+    </field>
+</record>
+
+<!-- model.name form view -->
+<record id="delfimart_barang_view_form" model="ir.ui.view">
+    <field name="name">Form Barang</field>
+    <field name="model">delfimart.barang</field>
+    <field name="arch" type="xml">
+        <form string="">
+            <sheet>
+                <group>
+                    <!-- Add your fields here -->
+                    <field name="kode_barang"/>
+                    <field name="name"/>
+                    <field name="kode_produk_id"/>
+                    <field name="satuan"/>
+                    <field name="harga_beli"/>
+                    <field name="harga_jual"/>
+                    <field name="stok"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<!-- model.name action window -->
+<record id="delfimart_barang_action" model="ir.actions.act_window">
+    <field name="name">Barang</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">delfimart.barang</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="delfimart_barang_menu_act" 
+        name="Barang" 
+        parent="delfimart_item_menu_categ" 
+        action="delfimart_barang_action" 
+        sequence="30"/>
+</odoo>
