@@ -43,9 +43,14 @@ class MinimartPenjualan(models.Model):
     @api.ondelete(at_uninstall=False)
     def _ondelete_penjualandetail(self):
         if self.detailpenjualan_ids:
+            a=[]
             for rec in self:  
-                a = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)]).mapped('qty')
-                # self.env['minimart.barang'].search([('id','=',rec.id)]).write({'stok'+: a})
+                a = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
+                print(a)
+            for i in a:
+                print(str(i.barang_id.name) + ' ' + str(i.qty))
+                i.barang_id.stok += i.qty
+
                 
 
 class MinimartDetailPenjualan(models.Model):
@@ -84,6 +89,8 @@ class MinimartDetailPenjualan(models.Model):
             self.env['minimart.barang'].search([('id', '=', record.barang_id.id)]).write(
                 {'stok': record.barang_id.stok - record.qty})
             return record
+
+
 
     
 
