@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class MinimartPenjualan(models.Model):
@@ -90,6 +91,13 @@ class MinimartDetailPenjualan(models.Model):
                 {'stok': record.barang_id.stok - record.qty})
             return record
 
+    @api.constrains('qty')
+    def _checkQuantity(self):
+        for rec in self:
+            if rec.qty < 1 :
+                raise ValidationError('Mau belanja {} brp biji sihh...'.format(rec.barang_id.name))
+            elif (rec.qty > rec.barang_id.stok):
+                raise ValidationError('Stok {} tidak mencukupi, hanya tersedia {} {}'.format(rec.barang_id.name,rec.barang_id.stok,rec.barang_id.satuan))
 
 
     
