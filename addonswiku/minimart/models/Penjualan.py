@@ -52,6 +52,9 @@ class MinimartPenjualan(models.Model):
                 print(str(i.barang_id.name) + ' ' + str(i.qty))
                 i.barang_id.stok += i.qty
 
+    _sql_constraints = [
+        ('key_uniq', 'unique (name)', 'No. Nota tidak boleh sama')
+    ]
                 
 
 class MinimartDetailPenjualan(models.Model):
