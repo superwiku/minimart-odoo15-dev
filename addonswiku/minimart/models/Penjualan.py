@@ -41,21 +41,28 @@ class MinimartPenjualan(models.Model):
         else:
             self.gender = ""
 
-    @api.ondelete(at_uninstall=False)
-    def _ondelete_penjualandetail(self):
+    # @api.ondelete(at_uninstall=False)
+    # def _ondelete_penjualandetail(self):
+    #     if self.detailpenjualan_ids:
+    #         a=[]
+    #         for rec in self:  
+    #             a = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
+    #             print(a)
+    #         for i in a:
+    #             print(str(i.barang_id.name) + ' ' + str(i.qty))
+    #             i.barang_id.stok += i.qty
+
+    def unlink(self):
         if self.detailpenjualan_ids:
-            a=[]
-            for rec in self:  
-                a = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
+            a=[]    
+            for wiku in self:         
+                a = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',wiku.id)])
                 print(a)
             for i in a:
                 print(str(i.barang_id.name) + ' ' + str(i.qty))
                 i.barang_id.stok += i.qty
+        record = super(MinimartPenjualan, self).unlink()
 
-    _sql_constraints = [
-        ('key_uniq', 'unique (name)', 'No. Nota tidak boleh sama')
-    ]
-                
 
 class MinimartDetailPenjualan(models.Model):
     _name = 'minimart.detailpenjualan'
@@ -94,15 +101,7 @@ class MinimartDetailPenjualan(models.Model):
                 {'stok': record.barang_id.stok - record.qty})
             return record
 
-    @api.constrains('qty')
-    def _checkQuantity(self):
-        for rec in self:
-            if rec.qty < 1 :
-                raise ValidationError('Mau belanja {} brp biji sihh...'.format(rec.barang_id.name))
-            elif (rec.qty > rec.barang_id.stok):
-                raise ValidationError('Stok {} tidak mencukupi, hanya tersedia {} {}'.format(rec.barang_id.name,rec.barang_id.stok,rec.barang_id.satuan))
-
-
+  
     
 
 
