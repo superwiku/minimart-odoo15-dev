@@ -86,7 +86,7 @@ class MinimartPenjualan(models.Model):
                 databaru.barang_id.stok -= databaru.qty
      
     _sql_constraints = [
-        ('key_uniq', 'unique (name)', 'No. Nota tidak boleh sama')
+        ('key_uniq','unique(name)','No. Nota tidak boleh sama')
     ]
                 
 
@@ -132,8 +132,14 @@ class MinimartDetailPenjualan(models.Model):
                 {'stok': record.barang_id.stok - record.qty})
         return record
 
+   
     @api.constrains('qty')
-    
+    def _checkQuantity(self):
+        for rec in self:
+            if rec.qty < 1 :
+                raise ValidationError('Mau belanja {} brp biji sihh...'.format(rec.barang_id.name))
+            elif (rec.qty > rec.barang_id.stok):
+                raise ValidationError('Stok {} tidak mencukupi, hanya tersedia {} {}'.format(rec.barang_id.name,rec.barang_id.stok,rec.barang_id.satuan))
     
 
 
