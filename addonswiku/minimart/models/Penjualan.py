@@ -7,15 +7,14 @@ class MinimartPenjualan(models.Model):
     _description = 'New Description'
 
     membership = fields.Boolean(string='Apakah member')
-    name = fields.Char(string='No. Nota')
-    nama_nonmember = fields.Char(string='Nama')
-    pelanggan_id = fields.Many2one(comodel_name='minimart.pelanggan')
-    id_member = fields.Char(compute='_compute_id_member', string='ID Member')
 
-    @api.depends('pelanggan_id')
-    def _compute_id_member(self):
-        for rec in self:
-            rec.id_member = rec.pelanggan_id.id_member
+    name = fields.Char(string='No. Nota')
+
+    nama_nonmember = fields.Char(string='Nama')
+
+    pelanggan_id = fields.Many2one(comodel_name='minimart.pelanggan')
+
+    id_member = fields.Char(compute='_compute_id_member', string='ID Member')
 
     gender = fields.Selection([
         ('male', 'Male'), ('female', 'Female')
@@ -23,10 +22,17 @@ class MinimartPenjualan(models.Model):
 
     tgl_nota = fields.Datetime(string='Tanggal Nota', required='True',
                                default=fields.Datetime.now())
+
     total_bayar = fields.Integer(compute='_compute_totalbayar', string='Total Bayar')
+
     detailpenjualan_ids = fields.One2many(comodel_name='minimart.detailpenjualan',
                                           inverse_name='penjualan_id',
                                           string='List Barang')
+
+    @api.depends('pelanggan_id')
+    def _compute_id_member(self):
+        for rec in self:
+            rec.id_member = rec.pelanggan_id.id_member
 
     @api.depends('detailpenjualan_ids')
     def _compute_totalbayar(self):
@@ -63,21 +69,6 @@ class MinimartPenjualan(models.Model):
                 i.barang_id.stok += i.qty
         record = super(MinimartPenjualan, self).unlink()
 
-    def write(self,vals):
-        for rec in self:
-            a=self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
-            print(a)
-            for i in a:
-                print(str(i.barang_id.name) + ' ' +str(i.qty))
-                i.barang_id.stok += i.qty
-        record = super(MinimartPenjualan,self).write(vals)     
-        for rec in self:
-            a=self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
-            print(a)
-            for i in a:
-                print(str(i.barang_id.name) + ' ' +str(i.qty))      
-                i.barang_id.stok -= i.qty 
-        return record
 
 
 class MinimartDetailPenjualan(models.Model):
@@ -85,10 +76,18 @@ class MinimartDetailPenjualan(models.Model):
     _description = 'New Description'
 
     name = fields.Char(string='Nama')
+
     penjualan_id = fields.Many2one(comodel_name='minimart.penjualan', string='Penjualan')
+
     barang_id = fields.Many2one(comodel_name='minimart.barang', string='Barang')
+
     harga_satuan = fields.Integer(string='Harga Satuan')
+
     satuan = fields.Char(string='Satuan')
+
+    qty = fields.Integer(string='QTY')
+    
+    subtotal = fields.Integer(compute='_compute_subtotal', string='subtotal')
 
     @api.onchange('barang_id')
     def _onchange_satuan(self):
@@ -99,10 +98,7 @@ class MinimartDetailPenjualan(models.Model):
 
     @api.onchange('barang_id')
     def _compute_satuan(self):
-       self.satuan = self.barang_id.satuan
-
-    qty = fields.Integer(string='QTY')
-    subtotal = fields.Integer(compute='_compute_subtotal', string='subtotal')
+       self.satuan = self.barang_id.satuan    
 
     @api.depends('qty', 'harga_satuan')
     def _compute_subtotal(self):

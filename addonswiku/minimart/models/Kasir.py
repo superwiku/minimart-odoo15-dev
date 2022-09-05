@@ -7,6 +7,7 @@ class Kasir(models.Model):
     _description = 'New Description'
 
     id_pegawai = fields.Char(string='ID Pegawai')
+    
     status_pegawai = fields.Selection([
         ('kontrak', 'Pegawai Kontrak'),
         ('tetap', 'Pegawai Tetap'),

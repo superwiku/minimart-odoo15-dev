@@ -7,6 +7,7 @@ class Pelanggan(models.Model):
     _description = 'New Description'
 
     id_member = fields.Char(string='ID Member')
+    
     level = fields.Char(string='Level')
     
     

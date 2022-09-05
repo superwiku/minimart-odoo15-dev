@@ -14,6 +14,12 @@ class MinimartGrup(models.Model):
         ], string='Nama Grup', ondelete='cascade')
 
     kode_grup = fields.Char(string='Kode Grup')
+    
+    produk_ids = fields.One2many(
+        comodel_name='minimart.produk',
+        inverse_name='grup_id',
+        string='Produk-produk',
+        required=False)
 
     @api.onchange('name')
     def _onchange_namagrup(self):
@@ -27,10 +33,3 @@ class MinimartGrup(models.Model):
             self.kode_grup = 'bhnmak2345'
         elif (self.name == 'bahanmakananbasah'):
             self.kode_grup = 'bhnmak0123'
-
-    
-    produk_ids = fields.One2many(
-        comodel_name='minimart.produk',
-        inverse_name='grup_id',
-        string='Produk-produk',
-        required=False)

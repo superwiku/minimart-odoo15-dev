@@ -6,13 +6,17 @@ class MinimartProduk(models.Model):
     _description = 'Description'
 
     name = fields.Char(string='Nama Produk')
+
     kode_spec = fields.Char(string='Kode Spec')    
+
     kode_produk = fields.Char(
         string='Kode Produk')
+
     grup_id = fields.Many2one(
         comodel_name='minimart.grup',
         string='ID Grup',
         required=False)
+        
     barang_ids = fields.One2many(
         comodel_name='minimart.barang',
         inverse_name='produk_id',
