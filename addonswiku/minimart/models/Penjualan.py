@@ -67,9 +67,35 @@ class MinimartPenjualan(models.Model):
             for i in a:
                 print(str(i.barang_id.name) + ' ' + str(i.qty))
                 i.barang_id.stok += i.qty
+<<<<<<< HEAD
         record = super(MinimartPenjualan, self).unlink()
 
 
+=======
+        record = super(MinimartPenjualan,self).unlink()
+
+
+    def write(self,vals):
+        for rec in self:
+            a = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
+            print(a)
+            for data in a:
+                print(str(data.barang_id.name)+" "+str(data.qty))
+                data.barang_id.stok += data.qty
+        record = super(MinimartPenjualan,self).write(vals)        
+        return record
+        for rec in self:
+            b = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
+            print(b)
+            for databaru in b:
+                print(str(databaru.barang_id.name)+" "+str(databaru.qty))
+                databaru.barang_id.stok -= databaru.qty
+     
+    _sql_constraints = [
+        ('key_uniq', 'unique (name)', 'No. Nota tidak boleh sama')
+    ]
+                
+>>>>>>> 4f3c6615 (add constrain & write)
 
 class MinimartDetailPenjualan(models.Model):
     _name = 'minimart.detailpenjualan'
