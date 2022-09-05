@@ -67,13 +67,7 @@ class MinimartPenjualan(models.Model):
             for i in a:
                 print(str(i.barang_id.name) + ' ' + str(i.qty))
                 i.barang_id.stok += i.qty
-<<<<<<< HEAD
         record = super(MinimartPenjualan, self).unlink()
-
-
-=======
-        record = super(MinimartPenjualan,self).unlink()
-
 
     def write(self,vals):
         for rec in self:
@@ -95,7 +89,6 @@ class MinimartPenjualan(models.Model):
         ('key_uniq', 'unique (name)', 'No. Nota tidak boleh sama')
     ]
                 
->>>>>>> 4f3c6615 (add constrain & write)
 
 class MinimartDetailPenjualan(models.Model):
     _name = 'minimart.detailpenjualan'
@@ -139,7 +132,8 @@ class MinimartDetailPenjualan(models.Model):
                 {'stok': record.barang_id.stok - record.qty})
         return record
 
-  
+    @api.constrains('qty')
+    
     
 
 
