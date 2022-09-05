@@ -74,16 +74,21 @@ class MinimartPenjualan(models.Model):
             a = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
             print(a)
             for data in a:
-                print(str(data.barang_id.name)+" "+str(data.qty))
+                print(str(data.barang_id.name)+" "+str(data.qty)+' '+str(data.barang_id.stok))
                 data.barang_id.stok += data.qty
-        record = super(MinimartPenjualan,self).write(vals)        
-        return record
+        record = super(MinimartPenjualan,self).write(vals)    
         for rec in self:
             b = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
+            print(a)
             print(b)
             for databaru in b:
-                print(str(databaru.barang_id.name)+" "+str(databaru.qty))
-                databaru.barang_id.stok -= databaru.qty
+                if databaru in a:
+                    print(str(databaru.barang_id.name)+" "+str(databaru.qty)+" "+str(databaru.barang_id.stok))
+                    databaru.barang_id.stok -= databaru.qty    
+                else:
+                    pass
+        return record
+        
      
     _sql_constraints = [
         ('key_uniq','unique(name)','No. Nota tidak boleh sama')
