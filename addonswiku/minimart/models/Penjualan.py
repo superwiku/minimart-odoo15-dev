@@ -69,7 +69,26 @@ class MinimartPenjualan(models.Model):
                 i.barang_id.stok += i.qty
         record = super(MinimartPenjualan, self).unlink()
 
-
+    def write(self,vals):
+        for rec in self:
+            a = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
+            print(a)
+            for data in a:
+                print(str(data.barang_id.name)+" "+str(data.qty))
+                data.barang_id.stok += data.qty
+        record = super(MinimartPenjualan,self).write(vals)        
+        return record
+        for rec in self:
+            b = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
+            print(b)
+            for databaru in b:
+                print(str(databaru.barang_id.name)+" "+str(databaru.qty))
+                databaru.barang_id.stok -= databaru.qty
+     
+    _sql_constraints = [
+        ('key_uniq','unique(name)','No. Nota tidak boleh sama')
+    ]
+                
 
 class MinimartDetailPenjualan(models.Model):
     _name = 'minimart.detailpenjualan'
@@ -113,7 +132,14 @@ class MinimartDetailPenjualan(models.Model):
                 {'stok': record.barang_id.stok - record.qty})
         return record
 
-  
+   
+    @api.constrains('qty')
+    def _checkQuantity(self):
+        for rec in self:
+            if rec.qty < 1 :
+                raise ValidationError('Mau belanja {} brp biji sihh...'.format(rec.barang_id.name))
+            elif (rec.qty > rec.barang_id.stok):
+                raise ValidationError('Stok {} tidak mencukupi, hanya tersedia {} {}'.format(rec.barang_id.name,rec.barang_id.stok,rec.barang_id.satuan))
     
 
 
