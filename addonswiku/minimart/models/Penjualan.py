@@ -63,6 +63,22 @@ class MinimartPenjualan(models.Model):
                 i.barang_id.stok += i.qty
         record = super(MinimartPenjualan, self).unlink()
 
+    def write(self,vals):
+        for rec in self:
+            a=self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
+            print(a)
+            for i in a:
+                print(str(i.barang_id.name) + ' ' +str(i.qty))
+                i.barang_id.stok += i.qty
+        record = super(MinimartPenjualan,self).write(vals)     
+        for rec in self:
+            a=self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
+            print(a)
+            for i in a:
+                print(str(i.barang_id.name) + ' ' +str(i.qty))      
+                i.barang_id.stok -= i.qty 
+        return record
+
 
 class MinimartDetailPenjualan(models.Model):
     _name = 'minimart.detailpenjualan'
@@ -99,7 +115,7 @@ class MinimartDetailPenjualan(models.Model):
         if record.qty:
             self.env['minimart.barang'].search([('id', '=', record.barang_id.id)]).write(
                 {'stok': record.barang_id.stok - record.qty})
-            return record
+        return record
 
   
     
