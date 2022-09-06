@@ -20,7 +20,7 @@
     'application': True,
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'product'],
+    'depends': ['base', 'product', 'report_xlsx'],
 
     # always loaded
     'data': [
@@ -38,6 +38,7 @@
         'views/supplier_view.xml',
         'views/kasir_view.xml',
         'views/komisaris_view.xml',
+        'report/report.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

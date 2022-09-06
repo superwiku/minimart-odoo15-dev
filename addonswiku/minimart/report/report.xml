@@ -1,0 +1,20 @@
+<odoo>
+    <record id="report_supplier_xlsx" model="ir.actions.report">
+        <field name="name">Supplier Excel</field>
+        <field name="model">minimart.supplier</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">minimart.report_supplier_xlsx</field>
+        <field name="report_file">minimart.report_supplier_xlsx</field>
+        <field name="binding_model_id" ref="model_minimart_supplier"/>
+        <field name="binding_type">report</field>
+    </record>
+    <record id="report_penjualan_xlsx" model="ir.actions.report">
+        <field name="name">Penjualan Excel</field>
+        <field name="model">minimart.penjualan</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">minimart.report_penjualan_xlsx</field>
+        <field name="report_file">minimart.report_penjualan_xlsx</field>
+        <field name="binding_model_id" ref="model_minimart_penjualan"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

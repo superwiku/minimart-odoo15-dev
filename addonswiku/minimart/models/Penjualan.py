@@ -75,25 +75,24 @@ class MinimartPenjualan(models.Model):
             print(a)
             for data in a:
                 print(str(data.barang_id.name)+" "+str(data.qty)+' '+str(data.barang_id.stok))
-                data.barang_id.stok += data.qty
+                data.barang_id.stok = data.barang_id.stok + data.qty
         record = super(MinimartPenjualan,self).write(vals)    
         for rec in self:
-            b = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
-            print(a)
+            b = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])    
+            print(a)        
             print(b)
-            for databaru in b:
-                if databaru in a:
+            for databaru in b:   
+                if databaru in a:            
                     print(str(databaru.barang_id.name)+" "+str(databaru.qty)+" "+str(databaru.barang_id.stok))
-                    databaru.barang_id.stok -= databaru.qty    
+                    databaru.barang_id.stok = databaru.barang_id.stok - databaru.qty 
                 else:
                     pass
-        return record
-        
-     
+        return record     
+    
     _sql_constraints = [
-        ('key_uniq','unique(name)','No. Nota tidak boleh sama')
+        ('no_nota_unik','unique(name)','No. Nota harus unik yaaa...')
     ]
-                
+
 
 class MinimartDetailPenjualan(models.Model):
     _name = 'minimart.detailpenjualan'
@@ -137,7 +136,6 @@ class MinimartDetailPenjualan(models.Model):
                 {'stok': record.barang_id.stok - record.qty})
         return record
 
-   
     @api.constrains('qty')
     def _checkQuantity(self):
         for rec in self:
@@ -145,6 +143,7 @@ class MinimartDetailPenjualan(models.Model):
                 raise ValidationError('Mau belanja {} brp biji sihh...'.format(rec.barang_id.name))
             elif (rec.qty > rec.barang_id.stok):
                 raise ValidationError('Stok {} tidak mencukupi, hanya tersedia {} {}'.format(rec.barang_id.name,rec.barang_id.stok,rec.barang_id.satuan))
+            
     
 
 
