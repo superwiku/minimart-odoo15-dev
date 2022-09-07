@@ -1,0 +1,32 @@
+<odoo>
+    <record id="barang_datang_view_form_wizzard" model="ir.ui.view">
+        <field name="name">Kedatangan Barang</field>
+        <field name="model">minimart.barangdatang</field>
+        <field name="arch" type="xml">
+            <form string="Form Kedatangan Barang">
+                <group>
+                    <field name="barang_id"/>
+                    <field name="jumlah"/>
+                </group>
+                <footer>
+                    <button name="barang_datang" type="object" string="Create" class="btn btn-warning"/>
+                    <button string="Cancel" special="cancel" class="btn btn-warning"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="barang_datang_action_wizzard" model="ir.actions.act_window">
+        <field name="name">Kedatangan Barang</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">minimart.barangdatang</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="barang_datang_view_form_wizzard"/>
+        <field name="target">new</field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="barang_datang_menu_wizzard"
+              name="Kedatangan Barang"
+              parent="minimart_menu_root"
+              action="barang_datang_action_wizzard"
+              sequence="49"/>
+</odoo>

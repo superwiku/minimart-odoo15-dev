@@ -38,7 +38,8 @@
         'views/supplier_view.xml',
         'views/kasir_view.xml',
         'views/komisaris_view.xml',
-        'report/report.xml'
+        'report/report.xml',
+        'wizzard/barangdatang_wizzard_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

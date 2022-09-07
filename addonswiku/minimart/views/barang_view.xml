@@ -5,6 +5,7 @@
         <field name="model">minimart.barang</field>
         <field name="arch" type="xml">
             <tree string="minimart_barang_tree">
+<!--                <button name="%(minimart.barang_datang_action_wizzard)d" type="action" string="Barang Datang" class="btn btn-warning"/>-->
                 <field name="name"/>
                 <field name="jenis"/>
                 <field name="kode_barang"/>
@@ -21,6 +22,9 @@
         <field name="model">minimart.barang</field>
         <field name="arch" type="xml">
             <form string="minimart_barang_form">
+                <header>
+                    <button name="%(minimart.barang_datang_action_wizzard)d" type="action" string="Barang Datang" class="btn btn-warning"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="name"/>
