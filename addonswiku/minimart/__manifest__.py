@@ -39,6 +39,7 @@
         'views/kasir_view.xml',
         'views/komisaris_view.xml',
         'report/report.xml',
+        'report/faktur_penjualan_pdf.xml',
         'wizzard/barangdatang_wizzard_view.xml',
     ],
     # only loaded in demonstration mode
