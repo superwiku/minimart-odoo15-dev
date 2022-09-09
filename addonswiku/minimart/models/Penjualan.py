@@ -29,6 +29,27 @@ class MinimartPenjualan(models.Model):
                                           inverse_name='penjualan_id',
                                           string='List Barang')
 
+    state = fields.Selection(
+        string='State',
+        selection=[('draft', 'Draft'),
+                   ('confirm', 'Confirm'),
+                   ('done', 'Done'),
+                   ('cancel', 'Cancel'),
+                   ],
+        required=True, readonly=True, default="draft")
+
+    def action_confirm(self):
+        self.write({'state': 'confirm'})
+
+    def action_done(self):
+        self.write({'state': 'done'})
+
+    def action_cancel(self):
+        self.write({'state': 'cancel'})
+
+    def action_draft(self):
+        self.write({'state': 'draft'})
+
     @api.depends('pelanggan_id')
     def _compute_id_member(self):
         for rec in self:
@@ -59,38 +80,41 @@ class MinimartPenjualan(models.Model):
     #             i.barang_id.stok += i.qty
 
     def unlink(self):
-        if self.detailpenjualan_ids:
-            a=[]    
-            for wiku in self:         
-                a = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',wiku.id)])
-                print(a)
-            for i in a:
-                print(str(i.barang_id.name) + ' ' + str(i.qty))
-                i.barang_id.stok += i.qty
+        if self.filtered(lambda line: line.state != 'draft'):
+            raise ValidationError('Tidak dapat menghapus selain yang masih DRAFT')
+        else:
+            if self.detailpenjualan_ids:
+                a = []
+                for wiku in self:
+                    a = self.env['minimart.detailpenjualan'].search([('penjualan_id', '=', wiku.id)])
+                    print(a)
+                for i in a:
+                    print(str(i.barang_id.name) + ' ' + str(i.qty))
+                    i.barang_id.stok += i.qty
         record = super(MinimartPenjualan, self).unlink()
 
-    def write(self,vals):
+    def write(self, vals):
         for rec in self:
-            a = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])
+            a = self.env['minimart.detailpenjualan'].search([('penjualan_id', '=', rec.id)])
             print(a)
             for data in a:
-                print(str(data.barang_id.name)+" "+str(data.qty)+' '+str(data.barang_id.stok))
+                print(str(data.barang_id.name) + " " + str(data.qty) + ' ' + str(data.barang_id.stok))
                 data.barang_id.stok = data.barang_id.stok + data.qty
-        record = super(MinimartPenjualan,self).write(vals)    
+        record = super(MinimartPenjualan, self).write(vals)
         for rec in self:
-            b = self.env['minimart.detailpenjualan'].search([('penjualan_id','=',rec.id)])    
-            print(a)        
+            b = self.env['minimart.detailpenjualan'].search([('penjualan_id', '=', rec.id)])
+            print(a)
             print(b)
-            for databaru in b:   
-                if databaru in a:            
-                    print(str(databaru.barang_id.name)+" "+str(databaru.qty)+" "+str(databaru.barang_id.stok))
-                    databaru.barang_id.stok = databaru.barang_id.stok - databaru.qty 
+            for databaru in b:
+                if databaru in a:
+                    print(str(databaru.barang_id.name) + " " + str(databaru.qty) + " " + str(databaru.barang_id.stok))
+                    databaru.barang_id.stok = databaru.barang_id.stok - databaru.qty
                 else:
                     pass
-        return record     
-    
+        return record
+
     _sql_constraints = [
-        ('no_nota_unik','unique(name)','No. Nota harus unik yaaa...')
+        ('no_nota_unik', 'unique(name)', 'No. Nota harus unik yaaa...')
     ]
 
 
@@ -109,8 +133,10 @@ class MinimartDetailPenjualan(models.Model):
     satuan = fields.Char(string='Satuan')
 
     qty = fields.Integer(string='QTY')
-    
+
     subtotal = fields.Integer(compute='_compute_subtotal', string='subtotal')
+
+
 
     @api.onchange('barang_id')
     def _onchange_satuan(self):
@@ -121,7 +147,7 @@ class MinimartDetailPenjualan(models.Model):
 
     @api.onchange('barang_id')
     def _compute_satuan(self):
-       self.satuan = self.barang_id.satuan    
+        self.satuan = self.barang_id.satuan
 
     @api.depends('qty', 'harga_satuan')
     def _compute_subtotal(self):
@@ -139,11 +165,9 @@ class MinimartDetailPenjualan(models.Model):
     @api.constrains('qty')
     def _checkQuantity(self):
         for rec in self:
-            if rec.qty < 1 :
+            if rec.qty < 1:
                 raise ValidationError('Mau belanja {} brp biji sihh...'.format(rec.barang_id.name))
             elif (rec.qty > rec.barang_id.stok):
-                raise ValidationError('Stok {} tidak mencukupi, hanya tersedia {} {}'.format(rec.barang_id.name,rec.barang_id.stok,rec.barang_id.satuan))
-            
-    
-
-
+                raise ValidationError(
+                    'Stok {} tidak mencukupi, hanya tersedia {} {}'.format(rec.barang_id.name, rec.barang_id.stok,
+                                                                           rec.barang_id.satuan))
