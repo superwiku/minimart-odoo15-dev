@@ -7,7 +7,7 @@ class MinimartBarang(models.Model):
 
     name = fields.Char(string="Nama Barang")
 
-    kode_spec = fields.Char(string='Kode Spec')    
+    kode_spec = fields.Char(string='Kode Spec')
 
     kode_barang = fields.Char(
         string='Kode Barang',
@@ -18,15 +18,15 @@ class MinimartBarang(models.Model):
         required=False)
 
     harga_jual = fields.Integer(
-        string='Harga Jual', 
+        string='Harga Jual',
         required=False)
 
     harga_beli = fields.Integer(
-        string='Harga Beli', 
+        string='Harga Beli',
         required=False)
 
     stok = fields.Integer(
-        string='Stok', 
+        string='Stok',
         required=False)
 
     produk_id = fields.Many2one(
@@ -34,10 +34,11 @@ class MinimartBarang(models.Model):
         string='ID Produk',
         required=False)
 
-    jenis = fields.Selection([('minuman', 'Minuman'),('makanan', 'Makanan'),('bahanmakanan', 'Bahan Makanan')], string='Jenis')
-    
+    jenis = fields.Selection([('minuman', 'Minuman'), ('makanan', 'Makanan'), ('bahanmakanan', 'Bahan Makanan')],
+                             string='Jenis')
+
     supplier_ids = fields.Many2many(comodel_name='minimart.supplier', string='Daftar Supplier')
-    
-    @api.onchange('produk_id','kode_spec')
+
+    @api.onchange('produk_id', 'kode_spec')
     def _onchange_produk(self):
-        self.kode_barang = str(self.produk_id.kode_produk)+' '+str(self.kode_spec)
+        self.kode_barang = str(self.produk_id.kode_produk) + ' ' + str(self.kode_spec)

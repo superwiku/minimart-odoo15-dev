@@ -13,7 +13,8 @@
                 <field name="pelanggan_id" attrs="{'invisible':[('membership','=',False)]}"/>
                 <field name="gender"/>
                 <field name="tgl_nota"/>
-                <field name="total_bayar"/>                
+                <field name="total_bayar"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
@@ -24,16 +25,23 @@
         <field name="model">minimart.penjualan</field>
         <field name="arch" type="xml">
             <form string="">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" states="draft"/>
+                    <button name="action_done" type="object" string="Done" states="confirm"/>
+                    <button name="action_cancel" type="object" string="Cancel" confirm="Apakah penjualan ini akan di cancel ?" states="confirm, done"/>
+                    <button name="action_draft" type="object" string="Kembali ke Draft" confirm="Apakah penjualan ini akan di reset ke Draft ?" states="cancel"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done"/>
+                </header>
                 <sheet>                        
                     <group>
-                        <field name="membership"/>
-                        <field name="name"/>
-                        <field name="nama_nonmember" attrs="{'invisible':[('membership','=',True)]}"/>
-                        <field name="pelanggan_id" attrs="{'invisible':[('membership','=',False)]}"/>
-                        <field name="id_member" attrs="{'invisible':[('membership','=',False)]}"/>
-                        <field name="gender"/>
-                        <field name="tgl_nota"/>
-                        <field name="total_bayar"/>                                 
+                        <field name="membership" attrs="{'readonly' : [('state', '!=', 'draft')]}"/>
+                        <field name="name" attrs="{'readonly' : [('state', '!=', 'draft')]}"/>
+                        <field name="nama_nonmember" attrs="{'invisible':[('membership','=',True)], 'readonly': [('state', '!=', 'draft')] }" />
+                        <field name="pelanggan_id" attrs="{'invisible':[('membership','=',False)], 'readonly' : [('state', '!=', 'draft')]}"/>
+                        <field name="id_member" attrs="{'invisible':[('membership','=',False)], 'readonly' : [('state', '!=', 'draft')]}"/>
+                        <field name="gender" attrs="{'readonly' : [('state', '!=', 'draft')]}"/>
+                        <field name="tgl_nota" attrs="{'readonly' : [('state', '!=', 'draft')]}"/>
+                        <field name="total_bayar" attrs="{'readonly' : [('state', '!=', 'draft')]}"/>
                     </group>
                     <group name="name" string="Barang">
                         <field name="detailpenjualan_ids">
