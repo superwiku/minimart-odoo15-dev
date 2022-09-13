@@ -9,3 +9,5 @@ access_minimart_pelanggan,access.minimart.pelanggan,model_minimart_pelanggan,,1,
 access_minimart_supplier,access.minimart.supplier,model_minimart_supplier,,1,1,1,1
 access_minimart_kasir,access.minimart.kasir,model_minimart_kasir,,1,1,1,1
 access_minimart_barangdatang,access.minimart.barangdatang,model_minimart_barangdatang,,1,1,1,1
+access_minimart_penjualanreport,access.minimart.penjualanreport,model_minimart_penjualanreport,,1,1,1,1
+

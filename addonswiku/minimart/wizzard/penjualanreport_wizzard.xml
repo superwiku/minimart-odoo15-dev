@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="penjualanreport_wizzard_view_form" model="ir.ui.view">
+        <field name="name">penjualanreport_wizzard_view_form</field>
+        <field name="model">minimart.penjualanreport</field>
+        <field name="arch" type="xml">
+            <form string="penjualanreport_wizzard_form">
+                <group name="pelanggan" string="Pelanggan">
+                      <field name="pelanggan_id"/>
+                </group>
+                <group name="waktu" string="Waktu">
+                      <field name="dari_tgl"/>
+                      <field name="ke_tgl"/>
+                </group>
+                <footer>
+                    <button name="action_reportpenjualan" type="object" string="Print Report" class="btn btn-warning"/>
+                    <button special="cancel" string="Cancel" class="btn btn-danger"/>
+                </footer>
+
+            </form>
+        </field>
+    </record>
+    <record id="penjualanreport_wizzard_action" model="ir.actions.act_window">
+        <field name="name">Penjualan Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">minimart.penjualanreport</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="penjualanreport_wizzard_view_form"/>
+        <field name="target">new</field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="penjualanreport_wizzard_menu_action"
+              name="Penjualan Report"
+              parent="minimart_menu_root"
+              action="penjualanreport_wizzard_action"
+              sequence="49"/>
+</odoo>

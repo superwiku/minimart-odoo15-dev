@@ -28,5 +28,5 @@
               name="Kedatangan Barang"
               parent="minimart_menu_root"
               action="barang_datang_action_wizzard"
-              sequence="49"/>
+              sequence="48"/>
 </odoo>

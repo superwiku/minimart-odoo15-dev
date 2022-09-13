@@ -8,6 +8,13 @@ class Pelanggan(models.Model):
 
     id_member = fields.Char(string='ID Member')
     
-    level = fields.Char(string='Level')
+    level = fields.Selection(
+        string='Level',
+        selection=[('silver', 'Silver'),
+                   ('gold', 'Gold'),
+                   ('platinum', 'Patinum'),
+                   ],
+        required=True, readonly=True, default='silver')
+
     
     

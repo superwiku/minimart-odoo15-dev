@@ -41,6 +41,7 @@
         'report/report.xml',
         'report/faktur_penjualan_pdf.xml',
         'wizzard/barangdatang_wizzard_view.xml',
+        'wizzard/penjualanreport_wizzard.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

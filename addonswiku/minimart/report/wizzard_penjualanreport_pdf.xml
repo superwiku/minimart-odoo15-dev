@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><template id="report_penjualan_wizzard_pdf">
+        <t t-call="web.html_container">
+<!--            <t t-call="web.internal_layout">-->
+             <t t-call="web.external_layout">
+                <div class="page">
+                    <h1>REPORT PENJUALAN MEMBER</h1>
+                        <div class="row">
+                            <div class="col-4">Member  :</div>
+                            <div class="col-8">
+                                <t t-esc="form['pelanggan_id'][1]"/>
+                            </div>
+                        </div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th name="th_name" class="text-left">
+                                        <span>Nomor Nota Pembelian</span>
+                                    </th>
+                                    <th name="th_tgl_nota" class="text-left">
+                                        <span>Tanggal Penjualan</span>
+                                    </th>
+                                    <th name="th_total_bayar" class="text-left">
+                                        <span>Total Pembayaran</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <t t-foreach="penjualan" t-as="line">
+                                <tr>
+                                    <td>
+                                        <span t-esc="line['name']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line['tgl_nota']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line['total_bayar']"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
