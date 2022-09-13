@@ -33,4 +33,5 @@ class PenjualanReport(models.TransientModel):
             'form': self.read()[0],
             'penjualan': penjualan
         }
+        print(data)
         return self.env.ref('minimart.report_penjualan_wizzardxx').report_action(self, data=data)
