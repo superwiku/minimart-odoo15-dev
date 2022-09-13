@@ -40,6 +40,7 @@
         'views/komisaris_view.xml',
         'report/report.xml',
         'report/faktur_penjualan_pdf.xml',
+        'report/wizzard_penjualanreport_pdf.xml',
         'wizzard/barangdatang_wizzard_view.xml',
         'wizzard/penjualanreport_wizzard.xml',
     ],

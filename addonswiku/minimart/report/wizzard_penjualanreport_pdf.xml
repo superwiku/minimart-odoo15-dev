@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo><template id="report_penjualan_wizzard_pdf">
+<odoo>
+    <template id="report_penjualan_wizzardxx_pdf">
         <t t-call="web.html_container">
 <!--            <t t-call="web.internal_layout">-->
              <t t-call="web.external_layout">
@@ -8,7 +9,7 @@
                         <div class="row">
                             <div class="col-4">Member  :</div>
                             <div class="col-8">
-                                <t t-esc="form['pelanggan_id'][1]"/>
+                                <t t-esc="form['pelanggan_id'][0]"/>
                             </div>
                         </div>
                         <table class="table table-bordered">
