@@ -42,7 +42,7 @@
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <h1>
+                        <h1 style="color:red">
                             <field name="kode" readonly="1"/>
                         </h1>
                     </div>
