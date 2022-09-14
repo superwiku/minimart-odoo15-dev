@@ -5,8 +5,11 @@
         <field name="name">minimart.penjualan.view.tree</field>
         <field name="model">minimart.penjualan</field>
         <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
+            <tree decoration-success="state=='done'"
+                  decoration-warning="state=='confirm'"
+                  decoration-info="state=='draft'"
+                  decoration-muted="state=='cancel'">
+                <field name="kode"/>
                 <field name="membership"/>
                 <field name="nama_nonmember" attrs="{'invisible':[('membership','=',True)]}"/>
                 <field name="id_member" attrs="{'invisible':[('membership','=',False)]}"/>
@@ -14,7 +17,12 @@
                 <field name="gender"/>
                 <field name="tgl_nota"/>
                 <field name="total_bayar"/>
-                <field name="state"/>
+                <field name="state"
+                    decoration-success="state=='done'"
+                    decoration-warning="state=='confirm'"
+                    decoration-info="state=='draft'"
+                    decoration-muted="state=='cancel'"
+                    widget="badge"/>
             </tree>
         </field>
     </record>
@@ -28,14 +36,18 @@
                 <header>
                     <button name="action_confirm" type="object" string="Confirm" states="draft"/>
                     <button name="action_done" type="object" string="Done" states="confirm"/>
-                    <button name="action_cancel" type="object" string="Cancel" confirm="Apakah penjualan ini akan di cancel ?" states="confirm, done"/>
-                    <button name="action_draft" type="object" string="Kembali ke Draft" confirm="Apakah penjualan ini akan di reset ke Draft ?" states="cancel"/>
+                    <button name="action_cancel" type="object" string="Cancel" confirm="Apakah penjualan ini akan di cancel ?" states="confirm"/>
+                    <button name="action_draft" type="object" string="Kembali ke Draft" confirm="Apakah penjualan ini akan di reset ke Draft ?" states="confirm,cancel"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done"/>
                 </header>
-                <sheet>                        
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="kode" readonly="1"/>
+                        </h1>
+                    </div>
                     <group>
                         <field name="membership" attrs="{'readonly' : [('state', '!=', 'draft')]}"/>
-                        <field name="name" attrs="{'readonly' : [('state', '!=', 'draft')]}"/>
                         <field name="nama_nonmember" attrs="{'invisible':[('membership','=',True)], 'readonly': [('state', '!=', 'draft')] }" />
                         <field name="pelanggan_id" attrs="{'invisible':[('membership','=',False)], 'readonly' : [('state', '!=', 'draft')]}"/>
                         <field name="id_member" attrs="{'invisible':[('membership','=',False)], 'readonly' : [('state', '!=', 'draft')]}"/>
@@ -44,7 +56,7 @@
                         <field name="total_bayar" attrs="{'readonly' : [('state', '!=', 'draft')]}"/>
                     </group>
                     <group name="name" string="Barang">
-                        <field name="detailpenjualan_ids">
+                        <field name="detailpenjualan_ids" attrs="{'readonly' : [('state', '!=', 'draft')]}">
                             <tree editable='bottom'>
                                 <field name="barang_id"/>
                                 <field name="satuan"/>

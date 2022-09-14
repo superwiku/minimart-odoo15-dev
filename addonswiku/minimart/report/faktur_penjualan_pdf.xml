@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="report_penjualan_pdf">
+    <template id="report_penjualan_pdf_tmp">
         <t t-call="web.html_container">
             <t t-call="web.internal_layout">
             <!-- <t t-call="web.external_layout"> -->

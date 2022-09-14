@@ -21,8 +21,8 @@
         <field name="name">Cetak Faktur</field>
         <field name="model">minimart.penjualan</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">minimart.report_penjualan_pdf</field>
-        <field name="report_file">minimart.report_penjualan_pdf</field>
+        <field name="report_name">minimart.report_penjualan_pdf_tmp</field>
+        <field name="report_file">minimart.report_penjualan_pdf_tmp</field>
         <field name="binding_model_id" ref="model_minimart_penjualan"/>
         <field name="binding_type">report</field>
     </record>

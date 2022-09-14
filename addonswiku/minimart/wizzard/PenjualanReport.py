@@ -27,11 +27,9 @@ class PenjualanReport(models.TransientModel):
             member += [('tgl_nota', '>=', dari_tgl)]
         if ke_tgl:
             member += [('tgl_nota', '<=', ke_tgl)]
-        print(member)
         penjualan = self.env['minimart.penjualan'].search_read(member)
         data = {
             'form': self.read()[0],
             'penjualan': penjualan
         }
-        print(data)
         return self.env.ref('minimart.report_penjualan_wizzardxx').report_action(self, data=data)

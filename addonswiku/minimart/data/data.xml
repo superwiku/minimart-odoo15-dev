@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Sequences for minimart.penjualan -->
+        <record id="seq_minimart_penjualan" model="ir.sequence">
+            <field name="name">Penjualan Sequence</field>
+            <field name="code">minimart.penjualan</field>
+            <field name="prefix">SALE</field>
+            <field name="padding">8</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

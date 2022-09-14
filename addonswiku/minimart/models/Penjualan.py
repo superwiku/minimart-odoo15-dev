@@ -1,14 +1,16 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
 class MinimartPenjualan(models.Model):
     _name = 'minimart.penjualan'
     _description = 'New Description'
+    _rec_name = 'kode'
 
+    kode = fields.Char(string='Kode Penjualan', required=True, copy=False, readonly=True,
+                       default=lambda self: _('New'))
+    name = fields.Char(string='No. Nota', required=False)
     membership = fields.Boolean(string='Apakah member')
-
-    name = fields.Char(string='No. Nota')
 
     nama_nonmember = fields.Char(string='Nama')
 
@@ -96,21 +98,25 @@ class MinimartPenjualan(models.Model):
     def write(self, vals):
         for rec in self:
             a = self.env['minimart.detailpenjualan'].search([('penjualan_id', '=', rec.id)])
-            print(a)
             for data in a:
                 print(str(data.barang_id.name) + " " + str(data.qty) + ' ' + str(data.barang_id.stok))
                 data.barang_id.stok = data.barang_id.stok + data.qty
         record = super(MinimartPenjualan, self).write(vals)
         for rec in self:
             b = self.env['minimart.detailpenjualan'].search([('penjualan_id', '=', rec.id)])
-            print(a)
-            print(b)
             for databaru in b:
                 if databaru in a:
                     print(str(databaru.barang_id.name) + " " + str(databaru.qty) + " " + str(databaru.barang_id.stok))
                     databaru.barang_id.stok = databaru.barang_id.stok - databaru.qty
                 else:
                     pass
+        return record
+
+    @api.model
+    def create(self, vals):
+        if vals.get('kode', _('New')) == _('New'):
+            vals['kode'] = self.env['ir.sequence'].next_by_code('minimart.penjualan') or _('New')
+        record = super(MinimartPenjualan, self).create(vals)
         return record
 
     _sql_constraints = [
@@ -135,8 +141,6 @@ class MinimartDetailPenjualan(models.Model):
     qty = fields.Integer(string='QTY')
 
     subtotal = fields.Integer(compute='_compute_subtotal', string='subtotal')
-
-
 
     @api.onchange('barang_id')
     def _onchange_satuan(self):
