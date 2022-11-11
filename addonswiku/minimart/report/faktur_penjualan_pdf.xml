@@ -7,9 +7,14 @@
                 <div class="page">
                     <h1>FAKTUR PENJUALAN</h1>
                     <t t-foreach="docs" t-as="doc">
+                        <p>
+                            <img t-if="doc.kodeqr"
+                                 style="display:block;"
+                                 t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', doc.kodeqr, 130, 130)"/>
+                        </p>
                         <div class="row">
                             <div class="col-4">Nomor Nota  :</div>
-                            <div class="col-8"><span t-field="doc.name"/></div>
+                            <div class="col-8"><span t-field="doc.kode"/></div>
                         </div>
                         <div class="row">
                             <div class="col-4">Nama(non member)  :</div>

@@ -14,6 +14,7 @@
                 <field name="harga_jual"/>
                 <field name="stok"/>
                 <field name="produk_id"/>
+                <field name="image" class="oe_avatar" widget="image" width="30px" height="30px"/>
             </tree>
         </field>
     </record>
@@ -26,8 +27,9 @@
                     <button name="%(minimart.barang_datang_action_wizzard)d" type="action" string="Barang Datang" class="btn btn-warning"/>
                 </header>
                 <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
                     <group>
-                        <field name="name"/>
+                        <h2><field name="name"/></h2>
                         <field name="jenis"/>
                         <field name="satuan"/>
                         <field name="kode_spec"/>
@@ -52,11 +54,48 @@
             </form>
         </field>
     </record>
+
+    <record id="minimart_barang_view_kanban" model="ir.ui.view">
+     <field name="name">minimart_barang_view_kanban</field>
+      <field name="model">minimart.barang</field>
+     <field name="arch" type="xml">
+        <kanban class="o_res_partner_kanban" sample="1">
+            <field name="name"/>
+            <field name="image" widget="image"/>
+            <field name="harga_jual" widget="monetary"/>
+     <templates>
+     <t t-name="kanban-box">
+         <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+            <div class="oe_kanban_details d-flex flex-column">
+                <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                <div class="row flex">
+                    <div class="col-md-4">
+                        <field name="image" widget="image"/>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            <li><h6 style="color:blue"><field name="name"/></h6></li>
+                            <li><field name="kode_barang"/></li>
+                            <li><span><h6 style="text-align:right">Rp. <field name="harga_jual"/></h6></span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="o_row">
+                    <span class="oe_kanban_partner_links"/>
+                </div>
+            </div>
+         </div>
+     </t>
+     </templates>
+     </kanban>
+     </field>
+    </record>
+
     <record id="minimart_barang_action" model="ir.actions.act_window">
         <field name="name">Barang</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">minimart.barang</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
     </record>
    <!-- This Menu Item must have a parent and an action -->
    <menuitem id="minimart_barang_menu_action" 

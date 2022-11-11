@@ -39,6 +39,8 @@ class MinimartBarang(models.Model):
 
     supplier_ids = fields.Many2many(comodel_name='minimart.supplier', string='Daftar Supplier')
 
+    image = fields.Image(string="Foto Produk")
+
     @api.onchange('produk_id', 'kode_spec')
     def _onchange_produk(self):
         self.kode_barang = str(self.produk_id.kode_produk) + ' ' + str(self.kode_spec)

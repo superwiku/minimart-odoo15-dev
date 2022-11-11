@@ -8,7 +8,7 @@ class MinimartPenjualan(models.Model):
     _rec_name = 'kode'
 
     kode = fields.Char(string='Kode Penjualan', required=True, copy=False, readonly=True,
-                       default=lambda self: _('New'))
+                       default=lambda self: _('New'), store=True)
     name = fields.Char(string='No. Nota', required=False)
     membership = fields.Boolean(string='Apakah member')
 
@@ -31,6 +31,7 @@ class MinimartPenjualan(models.Model):
                                           inverse_name='penjualan_id',
                                           string='List Barang')
 
+
     state = fields.Selection(
         string='State',
         selection=[('draft', 'Draft'),
@@ -39,6 +40,13 @@ class MinimartPenjualan(models.Model):
                    ('cancel', 'Cancel'),
                    ],
         required=True, readonly=True, default="draft")
+    kodeqr = fields.Char(compute="_compute_kode_str", string='Kodeqr', required=False)
+
+
+    @api.depends('kode')
+    def _compute_kode_str(self):
+        for rec in self:
+            rec.kodeqr = str(rec.kode)
 
     def action_confirm(self):
         self.write({'state': 'confirm'})
@@ -55,7 +63,7 @@ class MinimartPenjualan(models.Model):
     @api.depends('pelanggan_id')
     def _compute_id_member(self):
         for rec in self:
-            rec.id_member = rec.pelanggan_id.id_member
+            rec.id_member = rec.pelanggan_id.name
 
     @api.depends('detailpenjualan_ids')
     def _compute_totalbayar(self):

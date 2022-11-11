@@ -28,6 +28,7 @@
             </xpath>
         </field>
     </record>
+
    
     <!-- minimart.pelanggan action window -->
     <record id="minimart_pelanggan_action" model="ir.actions.act_window">
